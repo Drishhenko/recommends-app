@@ -5,15 +5,6 @@ import star from "../imgs/icon-star.png";
 
 const OverviewItem = ({overview}) => {
     const navigate = useNavigate();
-    
-    const mathOveralRating = (rating) => {
-        let ratingsArray = []
-        rating.forEach( rate => ratingsArray.push(rate.rate))
-        if(ratingsArray.length > 1) {
-          return ratingsArray.reduce((a, b) => (a+b))/ratingsArray.length
-        } else return ratingsArray[0]
-      
-    }
   
   return (
     <Card style={{ cursor: "pointer" }} className="p-3 m-2" onClick={() => navigate("/overveiw/" + overview.id)}>
@@ -24,7 +15,7 @@ const OverviewItem = ({overview}) => {
             <Image src={star} />
           </div>
           <div className='d-flex align-items-center'> 
-          {overview.overalRating.length? ('Средняя оценка ' + mathOveralRating(overview.overalRating)) : 'Оцени первым'}      
+          {overview.averageRating? ('Средняя оценка обзора ' + overview.averageRating) : 'Оцени обзорпервым '}
           <Image src={star} />
           </div>
         </Card.Body>
