@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
-const { Overview, Images } = require("../models")
+const { Overview, Images, Rating } = require("../models")
 
 
 
@@ -23,6 +23,13 @@ class OverviewController {
         }
 
         return res.json(overview)
+    }
+
+    async createRate(req, res) {
+        let {rate, overviewId, userId} = req.body
+        const rating = await Rating.create({rate, overviewId, userId})
+        console.log(rating)
+        return res.json(rating)
     }
 
     async getAll(req, res) {
@@ -48,7 +55,7 @@ class OverviewController {
 
     async getOne(req, res) {
         const {id} = req.params
-        const overview = await Overview.findOne({where: {id}, include: [{model: Images, as:'img'}]})
+        const overview = await Overview.findOne({where: {id}, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
         return res.json(overview)
     }
 

@@ -21,3 +21,8 @@ export const fetchTypes = async () => {
     const {data} = await $host.get('api/type')
     return data
 }
+
+export const createRate = async (rating) => {
+    const {data} = await $authHost.post('api/overview/overal-rating', rating)
+    return data
+}

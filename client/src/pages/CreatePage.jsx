@@ -65,7 +65,6 @@ const CreateOverview = observer(() => {
           Опубликовать обзор
         </Button>
         <Form.Range style={{width:200}} min="0" max="5" value={rating} onChange={e => setRating(e.target.value)} />
-
       </Form.Group>
       </Form>
     </Container>

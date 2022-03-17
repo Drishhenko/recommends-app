@@ -26,15 +26,15 @@ const Images = sequelize.define('images', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, allowNull: false}
 })
+const Rating = sequelize.define('rating', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    rate: {type: DataTypes.INTEGER, allowNull: false}
+})
 // const Hashtag = sequelize.define('hash-tag', {
 //     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 //     name: {type: DataTypes.STRING, unique: true, allowNull: false}
 // })
 
-// const Rating = sequelize.define('rating', {
-//     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-//     rate: {type: DataTypes.INTEGER, allowNull: false}
-// })
 
 // const OverviewTag = sequelize.define('overview-tag', {
 //     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
@@ -48,11 +48,12 @@ Overview.belongsTo(Type)
 
 Overview.hasMany(Images, {as: 'img'})
 Images.belongsTo(Overview)
-// User.hasMany(Rating)
-// Rating.belongsTo(User)
 
-// Overview.hasMany(Rating)
-// Rating.belongsTo(Overview)
+User.hasMany(Rating)
+Rating.belongsTo(User)
+
+Overview.hasMany(Rating, {as: 'overalRating'})
+Rating.belongsTo(Overview)
 
 
 // Overview.belongsToMany(Hashtag, {through: OverviewTag})
@@ -64,6 +65,6 @@ module.exports = {
     Overview,
     Type,
     Images,
+    Rating,
     // Hashtag
-    // Rating,
 }
