@@ -8,7 +8,6 @@ import { Container} from "react-bootstrap";
 const OverviewTop = observer(() => {
   const { overview } = useContext(Context);
   const newOverviews = []
-
   for (let item of overview.overviews) {
     let ratingsArray = []
     for ( let rate of item.overalRating) {
@@ -23,10 +22,12 @@ const OverviewTop = observer(() => {
     }
   }
 
+  console.log(overview.overviews)
+  
   return (
     <Container>
       <h1>Топовые обзоры</h1>
-      {newOverviews.map(i => 
+      {newOverviews.sort((a, b) => a.averageRating < b.averageRating ? 1 : -1).map(i => 
         <OverviewItem key={i.id} overview={i}/>
       )}
     </Container>
