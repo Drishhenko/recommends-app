@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
+const ApiError = require('../ApiError')
 
 const generateJwt = (id, email, role, name) => {
     return jwt.sign({id, email, role, name}, process.env.SECRET_KEY, { expiresIn: "24h" })

@@ -21,7 +21,7 @@ export default class OverviewStore {
     setSelectedType(type) {
         this._selectedType = type
     }
-    
+
 
     get types() {
         return this._types

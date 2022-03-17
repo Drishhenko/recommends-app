@@ -35,25 +35,27 @@ const mathOveralRating = (rating) => {
   return (
     <Container>
       <Card>
-        <Card.Title>{overview.name}</Card.Title>
-        <Card.Body className='d-flex'>
-          <div style={{ width: 100, height: 50, backgroundColor:'lightgray'}}> user {overview.rating}
+        <Card.Header style={{fontSize: 26, textAlign: 'center'}}>{overview.name}</Card.Header>
+        <Card.Body className='d-flex justify-content-around'>
+          <div className='d-flex align-items-center'> 
+            Оценка user {overview.rating}
             <Image src={star} />
           </div>
-          <div style={{ width: 100, height: 50, backgroundColor:'lightgray'}}> {overview.overalRating && mathOveralRating(overview.overalRating)}
+          <div className='d-flex align-items-center'> Средняя оценка {overview.overalRating && mathOveralRating(overview.overalRating)}
+          <Image src={star} />
           </div>
         </Card.Body>
         <Card.Text>
           <div>
             {overview.img.map(img => 
-            <Image style={{ width: 400}} key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
+            <Image style={{ width: '100%'}} key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
               )}
           </div>
           {overview.text}
         </Card.Text>
-        <div>
-          <Form.Range style={{width:200, marginBottom: 10}} min="0" max="5" value={rate} onChange={e => setRate(e.target.value)}/>
-          <Button  variant="dark" style={{width: 200}} onClick={addRate}>Оценить</Button>
+        <div style={{width: 200}}>
+          <Form.Range style={{marginBottom: 10}} min="0" max="5" value={rate} onChange={e => setRate(e.target.value)}/>
+          <Button  variant="dark"  onClick={addRate}>Оценить</Button>
         </div>
       </Card>
     </Container>

@@ -7,7 +7,6 @@ import { Container} from "react-bootstrap";
 
 const OverviewTop = observer(() => {
   const { overview } = useContext(Context);
-  console.log(overview)
   return (
     <Container>
       <h1>Топовые обзоры</h1>

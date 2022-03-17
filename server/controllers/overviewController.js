@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const path = require('path')
 const { Overview, Images, Rating } = require("../models")
-
+const ApiError = require('../ApiError')
 
 
 class OverviewController {
@@ -25,10 +25,13 @@ class OverviewController {
         return res.json(overview)
     }
 
-    async createRate(req, res) {
+    async createRate(req, res, next) {
         let {rate, overviewId, userId} = req.body
+        const candidate = await Rating.findOne({ where: {userId, overviewId} });
+        if (candidate) {
+            return next(ApiError.badRequest('Вы уже поставили оценку'))
+        } 
         const rating = await Rating.create({rate, overviewId, userId})
-        console.log(rating)
         return res.json(rating)
     }
 
@@ -39,16 +42,16 @@ class OverviewController {
         let offset = page * limit - limit
         let overviews 
         if (typeId && userId) {
-            overviews = await Overview.findAll({where:{typeId, userId}, limit, offset})
+            overviews = await Overview.findAll({where:{typeId, userId}, limit, offset, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
         }
         if (!typeId && userId) {
-            overviews = await Overview.findAll({where:{ userId}, limit, offset})
+            overviews = await Overview.findAll({where:{ userId}, limit, offset, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
         }
         if (typeId && !userId) {
-            overviews = await Overview.findAll({where:{typeId}, limit, offset})
+            overviews = await Overview.findAll({where:{typeId}, limit, offset, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
         }
         if (!typeId && !userId) {
-            overviews = await Overview.findAll({limit, offset})
+            overviews = await Overview.findAll({limit, offset, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
         }         
         return res.json(overviews)
     }
