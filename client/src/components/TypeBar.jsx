@@ -13,6 +13,8 @@ const TypeBar = observer(({handleTypeBarClick}) => {
     handleTypeBarClick(type.id)
    } 
 
+
+   
   return (
     <div className="d-flex w-100 flex-wrap" >
       {overview.types.map((type) => (

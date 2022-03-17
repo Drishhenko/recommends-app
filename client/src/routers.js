@@ -1,8 +1,7 @@
 import MainPage from './pages/MainPage'
 import AuthPage from './pages/AuthPage'
 import OverviewPage from './pages/OverviewPage'
-import TypePage from './pages/TypePage'
-import CreateOverview from './components/CreateOverview'
+import CreateOverview from './pages/CreatePage'
 import UserPage from './pages/UserPage'
 
 export const routers = [
@@ -20,16 +19,13 @@ export const routers = [
     },
     {
         path: '/user',
-        Comment: UserPage
+        Component: UserPage
     },
     {
         path: '/overveiw' + '/:id',
         Component: OverviewPage
     },
-    {
-        path: '/type',
-        Component: TypePage
-    },
+    
     {
         path: '/create-overview',
         Component: CreateOverview

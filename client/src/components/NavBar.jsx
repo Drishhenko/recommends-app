@@ -31,7 +31,7 @@ const NavBar = observer(() => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="/">i</Navbar.Brand>
+        <Navbar.Brand href="/">iRecommend</Navbar.Brand>
         <Nav className="w-100 d-flex justify-content-around">
           <Form className="d-flex">
             <FormControl

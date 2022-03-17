@@ -7,15 +7,16 @@ const { Overview, Images } = require("../models")
 class OverviewController {
     async create(req, res) {
         let {name, text, typeId, userId, rating} = req.body
-        let img = req.files      
+        let img = req.files
         const overview = await Overview.create({name, text, rating, typeId, userId})
-        console.log('img',img)
+       
         if(img) {
-            img.forEach(i => {
+             Object.values(img).flat().forEach(i=> {
+                console.log('i', i)
                 let fileName = uuid.v4() + ".jpg"
-                img.mv(path.resolve(__dirname, '..', 'static', fileName))
+                i.mv(path.resolve(__dirname, '..', 'static', fileName))
                 Images.create({
-                    name: i.fileName,
+                    name: fileName,
                     overviewId: overview.id
                 })
             })
@@ -47,7 +48,7 @@ class OverviewController {
 
     async getOne(req, res) {
         const {id} = req.params
-        const overview = await Overview.findOne({where: {id}})
+        const overview = await Overview.findOne({where: {id}, include: [{model: Images, as:'img'}]})
         return res.json(overview)
     }
 

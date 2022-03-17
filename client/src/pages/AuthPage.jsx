@@ -20,13 +20,13 @@ const AuthPage = observer(() => {
   
   const clickAuth = async () => {
     try {
-      let userAuth
+      let userData
       if (isLogin) {
-        userAuth = await login(email, password);
+        userData = await login(email, password);
       } else {
-        userAuth = await registration(email, password, name);
+        userData = await registration(email, password, name);
       }
-      
+      console.log(userData)
       user.setUser(user)
       user.setIsAuth(true)
       navigate('/')

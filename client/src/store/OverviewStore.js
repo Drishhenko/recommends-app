@@ -2,12 +2,7 @@ import {makeAutoObservable} from 'mobx'
 
 export default class OverviewStore {
     constructor() {
-      this._types = [
-          {id: 1, name:"Смартфоны"},
-          {id: 2, name:"Ноутбуки"},
-          {id: 3, name:"Компьютеры"},
-      ]
-      
+      this._types = []
       this._overviews = []
       this._selectedType ={}
       

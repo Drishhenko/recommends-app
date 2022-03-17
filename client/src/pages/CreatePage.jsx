@@ -1,11 +1,11 @@
 import React from "react";
-import { useContext, useState} from "react";
+import { useContext, useState, useEffect} from "react";
 import { Context } from "..";
-import TypeBar from "./TypeBar";
-import Rating from "./Rating";
+import TypeBar from "../components/TypeBar";
+import Rating from "../components/Rating";
 import { Button, Container, Form } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
-import { createOverview } from "../http/oveviewAPI";
+import { createOverview, fetchTypes} from "../http/oveviewAPI";
 
 const CreateOverview = observer(() => {
   const {overview} = useContext(Context)
@@ -16,42 +16,29 @@ const CreateOverview = observer(() => {
   const [files, setFiles] = useState(undefined)
   const userId = localStorage.getItem('id')
 
+  useEffect(() => {
+    fetchTypes().then(data => overview.setTypes(data))
+  }, [])
+
   const handleTypeBarClick = (id) => {
     setTypeId(id)
   }
 
   const selectFiles = e => {
-    setFiles(e.target.files)
+    setFiles( e.target.files)
   } 
-  // const fileToDataUri = (image) => {
-  //   return new Promise((res) => {
-  //     const reader = new FileReader();
-  //     reader.addEventListener('load', () => {
-  //         res(reader.result)
-  //     });
-  //     reader.readAsDataURL(image);
-  //   })
-  // }
   
-  // const selectFiles = async (e) => { 
-  //   let newImagesPromises = []
-  //   for (let i = 0; i< e.target.files.length; i++) {
-  //     newImagesPromises.push(fileToDataUri(e.target.files[i]))
-  //   }
-  //   const newImages = await Promise.all(newImagesPromises)
-  //   setFiles(newImages)
-  // }
-  
-
-  console.log('files',files)
 
   const addOverview = () => {
     const formData = new FormData()
     formData.append('name', name)
     formData.append('text', text)
-    formData.append('img', files)
+    for(let i=0; i<files.length; i++){
+      formData.append('img[]', files[i])
+    }
     formData.append('userId', userId)
     formData.append('typeId', typeId)
+    formData.append('rating', rating)
     createOverview(formData)
   }
   

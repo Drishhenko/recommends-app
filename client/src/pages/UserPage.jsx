@@ -1,10 +1,14 @@
 import React from 'react'
+import { Card, Container, Image } from 'react-bootstrap'
 
 const UserPage = () => {
   return (
-    <div>
-      твои обзоры
-    </div>
+    <Container>
+      <Card>
+
+      </Card>
+      
+    </Container>
   )
 }
 
