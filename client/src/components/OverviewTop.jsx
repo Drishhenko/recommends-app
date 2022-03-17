@@ -7,11 +7,12 @@ import { Container} from "react-bootstrap";
 
 const OverviewTop = observer(() => {
   const { overview } = useContext(Context);
+
   return (
     <Container>
       <h1>Топовые обзоры</h1>
-      {overview.overviews.map(overview => 
-        <OverviewItem key={overview.id} overview={overview}/>
+      {overview.overviews.map(i => 
+        <OverviewItem key={i.id} overview={i}/>
       )}
     </Container>
   );

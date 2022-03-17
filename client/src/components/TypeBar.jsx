@@ -5,16 +5,9 @@ import { Context } from "../index";
 import { Button} from "react-bootstrap";
 
 
-const TypeBar = observer(({handleTypeBarClick}) => {
+const TypeBar = observer(() => {
   const { overview } = useContext(Context);
  
-   const handleClick = (type) => {
-    overview.setSelectedType(type)
-    handleTypeBarClick(type.id)
-   } 
-
-
-   
   return (
     <div className="d-flex w-100 flex-wrap" >
       {overview.types.map((type) => (
@@ -23,7 +16,7 @@ const TypeBar = observer(({handleTypeBarClick}) => {
           key={type.id}
           className="p-2 m-2"
           active={type.id === overview.selectedType.id}
-          onClick={() => handleClick(type)}
+          onClick={() => overview.setSelectedType(type)}
         >
           {type.name}
         </Button>

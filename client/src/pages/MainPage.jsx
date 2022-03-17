@@ -10,14 +10,14 @@ const MainPage = observer(() => {
   const {overview} = useContext(Context)
 
 
-  // useEffect(() => {
-  //   fetchTypes().then(data => overview.setTypes(data))
-  //   fetchOverviews().then(data => overview.setOverviews(data))
-  // }, [])
-
   useEffect(() => {
+    fetchTypes().then(data => overview.setTypes(data))
     fetchOverviews().then(data => overview.setOverviews(data))
   }, [])
+
+  useEffect(() => {
+    fetchOverviews(overview.selectedType.id).then(data => overview.setOverviews(data))
+  }, [overview.selectedType])
 
   
   return (

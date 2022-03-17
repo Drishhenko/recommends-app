@@ -27,11 +27,10 @@ const addRate = () => {
 const mathOveralRating = (rating) => {
   let ratingsArray = []
   rating.forEach( rate => ratingsArray.push(rate.rate))
-  return ratingsArray.reduce((a, b) => (a+b))/ratingsArray.length
+  if(ratingsArray.length > 1) {
+    return ratingsArray.reduce((a, b) => (a+b))/ratingsArray.length
+  } else return ratingsArray[0]
 }
-
-
-
   return (
     <Container>
       <Card>

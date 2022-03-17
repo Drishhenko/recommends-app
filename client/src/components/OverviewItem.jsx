@@ -8,7 +8,6 @@ const OverviewItem = ({overview}) => {
     
     const mathOveralRating = (rating) => {
         let ratingsArray = []
-        console.log('rating',rating)
         rating.forEach( rate => ratingsArray.push(rate.rate))
         if(ratingsArray.length > 1) {
           return ratingsArray.reduce((a, b) => (a+b))/ratingsArray.length
