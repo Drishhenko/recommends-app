@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext }from "react";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import OverviewItem from "./OverviewItem";
@@ -21,8 +20,6 @@ const OverviewTop = observer(() => {
       newOverviews.push(item)
     }
   }
-
-  console.log(overview.overviews)
   
   return (
     <Container>

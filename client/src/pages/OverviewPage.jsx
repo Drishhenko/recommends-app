@@ -45,12 +45,14 @@ const mathOveralRating = (rating) => {
           </div>
         </Card.Body>
         <Card.Text>
-          <div>
+          <div className='d-flex flex-wrap justify-content-around'>
             {overview.img.map(img => 
-            <Image style={{ width: '100%'}} key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
+            <Image style={{width: '45%'}}key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
               )}
           </div>
-          {overview.text}
+          <div className='m-4'> 
+            {overview.text}
+          </div>
         </Card.Text>
         <div style={{width: 200}}>
           <Form.Range style={{marginBottom: 10}} min="0" max="5" value={rate} onChange={e => setRate(e.target.value)}/>

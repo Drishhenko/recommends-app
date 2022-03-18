@@ -19,6 +19,16 @@ const OverviewItem = ({overview}) => {
           <Image src={star} />
           </div>
         </Card.Body>
+        <Card.Text >
+          <div>
+            {overview.img.map(img => 
+                <Image style={{ width: '25%', margin: 15}} key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
+            )}
+          </div>
+          <div className='m-4'>
+            {overview.text}
+          </div>
+        </Card.Text>
     </Card>
   )
 }

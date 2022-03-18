@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import {observer} from "mobx-react-lite";
 import TypeBar from '../components/TypeBar'
 import OverviewTop from '../components/OverviewTop'
+import OverviewLast from '../components/OverviewLast'
 import { fetchOverviews, fetchTypes } from '../http/oveviewAPI'
 import { Context } from '..'
 import {Container} from 'react-bootstrap'
@@ -24,6 +25,7 @@ const MainPage = observer(() => {
     <Container>
       <TypeBar/>
       <OverviewTop/>
+      <OverviewLast/>
     </Container>
   )
 })
