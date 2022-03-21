@@ -3,6 +3,7 @@ import AuthPage from './pages/AuthPage'
 import OverviewPage from './pages/OverviewPage'
 import CreateOverview from './pages/CreatePage'
 import UserPage from './pages/UserPage'
+import AdminPage from './pages/AdminPage'
 
 export const routers = [
     {
@@ -18,7 +19,7 @@ export const routers = [
         Component: MainPage
     },
     {
-        path: '/user',
+        path: '/user/:id',
         Component: UserPage
     },
     {
@@ -31,5 +32,10 @@ export const routers = [
         Component: CreateOverview
 
     },
+
+    {
+        path: '/user/ADMIN',
+        Component: AdminPage
+    }
 
 ]

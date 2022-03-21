@@ -5,12 +5,12 @@ import star from "../imgs/icon-star.png";
 
 const OverviewItem = ({overview}) => {
     const navigate = useNavigate();
-  
+    
   return (
-    <Card style={{ cursor: "pointer" }} className="p-3 m-2" onClick={() => navigate("/overveiw/" + overview.id)}>
-          <Card.Header style={{fontSize: 20}}>{overview.text}</Card.Header>
+    <Card className="p-3 m-2" >
+          <Card.Header style={{fontSize: 20, cursor: "pointer" }} onClick={() => navigate("/overveiw/" + overview.id)}>{overview.text}</Card.Header>
           <Card.Body className='d-flex justify-content-around'>
-          <div className='d-flex align-items-center'> 
+          <div className='d-flex align-items-center' style={{cursor: "pointer" }} onClick={() => navigate('/user/' + overview.userId)}> 
             Оценка user {overview.rating}
             <Image src={star} />
           </div>
@@ -27,6 +27,9 @@ const OverviewItem = ({overview}) => {
           </div>
           <div className='m-4'>
             {overview.text}
+          </div>
+          <div className='d-flex justify-content-end'>
+            {new Date(Date.parse(overview.createdAt)).toLocaleString()}
           </div>
         </Card.Text>
     </Card>

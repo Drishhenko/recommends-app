@@ -1,0 +1,43 @@
+import React, {useState, useEffect } from 'react'
+import { login} from "../http/userAPI";
+import { observer } from "mobx-react-lite";
+import { useNavigate} from "react-router-dom";
+import {fetchUsers} from '../http/userAPI'
+import { Card, Container, Button} from 'react-bootstrap'
+
+const AdminPage = observer(() => {
+    const [users, setUsers]= useState({})
+    const navigate = useNavigate()
+    useEffect(() => {
+        fetchUsers().then(data => setUsers(data))
+      }, [])
+
+    const clickLogin = async (email, password) => {
+        let admin = true
+        await login(email, password, admin)
+        navigate('/')
+    }
+
+   console.log('users', users) 
+  return (
+     <Container>
+        <Card>
+            <Card.Header>
+                <h1>
+                  admin  
+                </h1>
+            </Card.Header>
+            {users.length ? (users.map( i => 
+                <Card.Body key={i.id} >
+                   <Button variant="dark" className ='d-flex align-items-center' onClick={ () => clickLogin(i.email, i.password)}>
+                        Войти как  {i.name}  
+                    </Button>
+                </Card.Body>)
+            ) : (<Card.Body> никого нет </Card.Body>)}
+            {}
+        </Card>
+     </Container>
+  )
+})
+
+export default AdminPage

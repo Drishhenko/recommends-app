@@ -16,6 +16,7 @@ import { Context } from "..";
 
 
 const NavBar = observer(() => {
+
   const navigate = useNavigate()
   
   const logOut = () => {
@@ -46,7 +47,12 @@ const NavBar = observer(() => {
           <>
           <Button variant="light" onClick={() => navigate('/create-overview')}> Добавить отзыв </Button>
           <Button variant="light" onClick={() => logOut()}> Выйти </Button> 
-          <Button variant="light" href="/user">{userName}</Button>
+          <Button variant="light" 
+          onClick={()=> {
+            if(localStorage.getItem('role')=== 'ADMIN'){
+              navigate('/user/ADMIN')
+            } else navigate('/user/' + localStorage.getItem('id'))}
+          }>{userName}</Button>
           </>
         :
           <Button variant="light" href="/login"> Войти </Button>
