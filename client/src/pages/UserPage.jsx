@@ -1,18 +1,23 @@
 import React, { useEffect, useState, useContext }from 'react'
 import { observer } from "mobx-react-lite";
-import { useParams} from 'react-router-dom'
+import { useParams, useNavigate} from 'react-router-dom'
 import {fetchOneUser} from '../http/userAPI'
+import {deleteOneOwverview} from '../http/oveviewAPI'
 import TypeBar from '../components/TypeBar'
 import OverviewItem from "../components/OverviewItem";
 import { fetchOverviews, fetchTypes } from '../http/oveviewAPI'
 import { Context } from '..'
-import { Card, Container} from 'react-bootstrap'
+import { Card, Container, Button} from 'react-bootstrap'
 
 
 const UserPage = observer(() => {
   const {overview} = useContext(Context)
   const [user, setUser]= useState({})
   const {id} = useParams()
+  const deleteClick = async (id) => {
+    await deleteOneOwverview(id)
+    window.location.reload()
+  }
  
   useEffect(() => {
     fetchOneUser(id).then(data => setUser(data))
@@ -44,21 +49,22 @@ const UserPage = observer(() => {
     }
   }
 
-  console.log('user', user)
-
   return ( 
     <Container>
       <Card>
         <Card.Header>
           <h1>
             {user.name}
-          </h1>          
+          </h1>  
         </Card.Header>
         <TypeBar/>
         <h2>Последние обзоры</h2>
       {newOverviews.sort((a, b) => a.averageRating < b.averageRating ? 1 : -1).map(i => 
+        <>
         <OverviewItem key={i.id} overview={i}/>
-      )}
+        <Button variant="danger" onClick={() => deleteClick(i.id)}>Удалить обзор</Button>        
+        </>
+        )}
       </Card>
       
     </Container>

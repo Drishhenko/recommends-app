@@ -54,10 +54,12 @@ const mathOveralRating = (rating) => {
             {overview.text}
           </div>
         </Card.Text>
-        <div style={{width: 200}}>
+        {localStorage.getItem('token')? 
+        (<div style={{width: 200}}>
           <Form.Range style={{marginBottom: 10}} min="0" max="5" value={rate} onChange={e => setRate(e.target.value)}/>
           <Button  variant="dark"  onClick={addRate}>Оценить</Button>
-        </div>
+        </div>) : 
+        (<></>)}
       </Card>
     </Container>
   )

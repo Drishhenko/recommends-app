@@ -63,12 +63,12 @@ class OverviewController {
     }
 
     async delete(req, res) {
-        const { id } = req.body
-        console.log('ID :::', id);
-        const type = await Overview .destroy({where: {id}})
+        const { id } = req.query
+        console.log('id:::'. id)
+        const overview = await Overview.destroy({where: {id}})
+        console.log('overview', overview)
         return res.json('deleted')
     }
-
 }
 
 module.exports = new OverviewController

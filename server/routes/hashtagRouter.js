@@ -1,9 +1,8 @@
 const Router = require ('express')
 const router = new Router()
 const hashtagController = require('../controllers/hashtagController')
-const authCheck = require('../check/authCheck')
 
-router.post('/', authCheck, hashtagController.create)
+router.post('/', hashtagController.create)
 router.get('/', hashtagController.getAll)
 
 

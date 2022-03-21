@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState, useEffect} from "react";
+import {useNavigate} from 'react-router-dom'
 import { Context } from "..";
 import TypeBar from "../components/TypeBar";
 import Rating from "../components/Rating";
@@ -9,20 +10,20 @@ import { createOverview, fetchTypes} from "../http/oveviewAPI";
 
 const CreateOverview = observer(() => {
   const {overview} = useContext(Context)
-  const [typeId, setTypeId] = useState(null)
   const [name, setName] = useState('')
   const [text, setText] = useState('')
   const [rating, setRating] = useState(undefined)
   const [files, setFiles] = useState(undefined)
-  const userId = localStorage.getItem('id')
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     fetchTypes().then(data => overview.setTypes(data))
   }, [])
 
-  const handleTypeBarClick = (id) => {
-    setTypeId(id)
-  }
+  // const handleTypeBarClick = (id) => {
+  //   setTypeId(id)
+  // }
 
   const selectFiles = e => {
     setFiles( e.target.files)
@@ -36,17 +37,18 @@ const CreateOverview = observer(() => {
     for(let i=0; i<files.length; i++){
       formData.append('img[]', files[i])
     }
-    formData.append('userId', userId)
-    formData.append('typeId', typeId)
+    formData.append('userId', localStorage.getItem('id'))
+    formData.append('typeId', overview.selectedType.id)
     formData.append('rating', rating)
     createOverview(formData)
+    navigate('/')
   }
-  
+    
   return (
     <Container>
       <h2>Добавить обзор</h2>
       <Form.Label className="mt-4"> Выберите тип </Form.Label>
-        <TypeBar handleTypeBarClick={handleTypeBarClick}/>
+        <TypeBar/>
       <Form className="mt-4">
         <Form.Group>
           <Form.Label> Название обзора </Form.Label>

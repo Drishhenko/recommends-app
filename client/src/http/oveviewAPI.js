@@ -17,6 +17,12 @@ export const fetchOneOverview = async (id) => {
     return data
 }
 
+export const deleteOneOwverview = async (id) => {
+    const {data} = await $authHost.delete('api/overview', {params: {id}} )
+    console.log('deleteData', data)
+    return data
+}
+
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/type')
     return data

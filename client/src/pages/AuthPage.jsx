@@ -28,7 +28,6 @@ const AuthPage = observer(() => {
       }
       console.log(userData)
       user.setUser(user)
-      user.setIsAuth(true)
       navigate('/')
       } catch (e) {
         alert(e.response.data.message)

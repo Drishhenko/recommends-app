@@ -38,17 +38,11 @@ class UserController {
       }
       return
     }
-    
     const token = generateJwt(user.id, user.email, user.role, user.name)
     const name = user.name
     const id = user.id
     const role = user.role
     return res.json({token, name, id, role})
-  }
-
-  async check(req, res) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role, req.user.name)
-    return res.json({token})
   }
 
   async getOne(req, res) {
@@ -59,7 +53,6 @@ class UserController {
     const createdAt = user.createdAt
     const role = user.role
     const email = user.email
-
     return res.json({userId, name, createdAt, role, email})
   }
 
@@ -67,9 +60,6 @@ class UserController {
     const users = await User.findAll()
     return res.json(users)
   }
-  
-
-
 }
 
 module.exports = new UserController();
