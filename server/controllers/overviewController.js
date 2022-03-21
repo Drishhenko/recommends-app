@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 const path = require('path')
-const { Overview, Images, Rating } = require("../models")
+const { Overview, Images, Rating, Comments } = require("../models")
 const ApiError = require('../ApiError')
 
 
@@ -35,6 +35,16 @@ class OverviewController {
         return res.json(rating)
     }
 
+    async createComment(req, res, next) {
+        let {text, overviewId, userId} = req.body
+        console.log(req.body)
+        if(!text) {
+            return next(ApiError.badRequest('Пустой комментарий'))
+        }
+        const comment = await Comments.create({text, overviewId, userId})
+        return res.json(comment)
+    }
+
     async getAll(req, res) {
         let {typeId, userId, limit, page} = req.query
         page = page || 1
@@ -58,7 +68,7 @@ class OverviewController {
 
     async getOne(req, res) {
         const {id} = req.params
-        const overview = await Overview.findOne({where: {id}, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}]})
+        const overview = await Overview.findOne({where: {id}, include: [{model: Images, as:'img'}, {model: Rating, as: 'overalRating'}, {model: Comments, as: 'comments'}]})
         return res.json(overview)
     }
 

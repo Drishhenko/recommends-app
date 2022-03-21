@@ -30,15 +30,11 @@ const Rating = sequelize.define('rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     rate: {type: DataTypes.INTEGER, allowNull: false}
 })
-// const Hashtag = sequelize.define('hash-tag', {
-//     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-//     name: {type: DataTypes.STRING, unique: true, allowNull: false}
-// })
 
-
-// const OverviewTag = sequelize.define('overview-tag', {
-//     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
-// })
+const Comments = sequelize.define('comments', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    text: {type: DataTypes.STRING}     
+})
 
 User.hasMany(Overview)
 Overview.belongsTo(User)
@@ -55,9 +51,11 @@ Rating.belongsTo(User)
 Overview.hasMany(Rating, {as: 'overalRating'})
 Rating.belongsTo(Overview)
 
+User.hasMany(Comments)
+Comments.belongsTo(User)
 
-// Overview.belongsToMany(Hashtag, {through: OverviewTag})
-// Hashtag.belongsToMany(Overview, {through: OverviewTag})
+Overview.hasMany(Comments, {as: 'comments'})
+Comments.belongsTo(Overview)
 
 
 module.exports = {
@@ -66,5 +64,5 @@ module.exports = {
     Type,
     Images,
     Rating,
-    // Hashtag
+    Comments
 }

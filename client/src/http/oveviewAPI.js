@@ -32,3 +32,8 @@ export const createRate = async (rating) => {
     const {data} = await $authHost.post('api/overview/overal-rating', rating)
     return data
 }
+
+export const createComment = async (comment) => {
+    const {data} = await $authHost.post('api/overview/comments', comment)
+    return data
+}
