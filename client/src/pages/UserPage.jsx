@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext }from 'react'
 import { observer } from "mobx-react-lite";
 import { useParams, useNavigate} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {fetchOneUser} from '../http/userAPI'
 import {deleteOneOwverview} from '../http/oveviewAPI'
 import TypeBar from '../components/TypeBar'
@@ -11,6 +12,7 @@ import { Card, Container, Button} from 'react-bootstrap'
 
 
 const UserPage = observer(() => {
+  const { t } = useTranslation()
   const {overview} = useContext(Context)
   const [user, setUser]= useState({})
   const {id} = useParams()
@@ -53,18 +55,21 @@ const UserPage = observer(() => {
     <Container>
       <Card>
         <Card.Header>
-          <h1>
+          <h2>
             {user.name}
-          </h1>  
+          </h2>  
         </Card.Header>
-        <TypeBar/>
-        <h2>Последние обзоры</h2>
+        <Card.Body>
+          <TypeBar/>
+        <h2 style={{textAlign:'center'}}>{t('Last reviews')}</h2>
       {newOverviews.sort((a, b) => a.averageRating < b.averageRating ? 1 : -1).map(i => 
         <>
         <OverviewItem key={i.id} overview={i}/>
-        <Button variant="danger" onClick={() => deleteClick(i.id)}>Удалить обзор</Button>        
+        <Button variant="danger" className='w-25' onClick={() => deleteClick(i.id)}>{t('Delete review')}</Button>        
         </>
         )}
+        </Card.Body>
+        
       </Card>
       
     </Container>

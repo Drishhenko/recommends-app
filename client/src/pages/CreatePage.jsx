@@ -1,18 +1,20 @@
 import React from "react";
 import { useContext, useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Context } from "..";
 import TypeBar from "../components/TypeBar";
-import Rating from "../components/Rating";
 import { Button, Container, Form } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import { createOverview, fetchTypes} from "../http/oveviewAPI";
+import star from "../imgs/star.svg";
 
 const CreateOverview = observer(() => {
+  const { t } = useTranslation()
   const {overview} = useContext(Context)
   const [name, setName] = useState('')
   const [text, setText] = useState('')
-  const [rating, setRating] = useState(undefined)
+  const [rating, setRating] = useState('0')
   const [files, setFiles] = useState(undefined)
   const navigate = useNavigate()
 
@@ -46,28 +48,34 @@ const CreateOverview = observer(() => {
     
   return (
     <Container>
-      <h2>Добавить обзор</h2>
-      <Form.Label className="mt-4"> Выберите тип </Form.Label>
+      <h2>{t('Add review')}</h2>
+      <Form.Label className="mt-4"> {t('Select type')}</Form.Label>
         <TypeBar/>
       <Form className="mt-4">
         <Form.Group>
-          <Form.Label> Название обзора </Form.Label>
+          <Form.Label>{t('Review title')}</Form.Label>
           <Form.Control value={name} onChange={e => setName(e.target.value)}></Form.Control>
         </Form.Group>
         <Form.Group>
-          <Form.Label className="mt-2"> Текст обзора </Form.Label>
+          <Form.Label className="mt-2"> {t('Review text')} </Form.Label>
           <Form.Control as="textarea" rows={7} value={text} onChange={e => setText(e.target.value)}/>
         </Form.Group>
         <Form.Group className="mt-2">
-          <Form.Label> Добавьте изобажение </Form.Label>
+          <Form.Label> {t('Add image')}</Form.Label>
           <Form.Control type="file" multiple onChange={selectFiles}/>
         </Form.Group>
-      <Form.Group className="d-flex align-items-center justify-content-between mt-4">
+      <Form className="d-flex align-items-center justify-content-between m-4">
+        <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center ">
+            <p style={{fontSize: 28, margin:0}}>{rating}</p>
+            <img src={star} style={{width:40}}/>
+          </div>
+          <Form.Range style={{width:200, marginLeft:10}} min="0" max="5" value={rating} onChange={e => setRating(e.target.value)} />
+        </div>
         <Button variant="dark" size="lg" onClick={addOverview}>
-          Опубликовать обзор
+        {t('Post review')}
         </Button>
-        <Form.Range style={{width:200}} min="0" max="5" value={rating} onChange={e => setRating(e.target.value)} />
-      </Form.Group>
+      </Form>
       </Form>
     </Container>
   );

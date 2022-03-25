@@ -1,37 +1,48 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom";
-import {Card, Image } from "react-bootstrap";
-import star from "../imgs/icon-star.png";
+import { useTranslation } from 'react-i18next'
+import {fetchOneUser} from '../http/userAPI'
+import {Card, Image, Carousel, CarouselItem, Row, Col } from "react-bootstrap";
+import star from "../imgs/star.svg";
 
 const OverviewItem = ({overview}) => {
-    const navigate = useNavigate();
+  const { t } = useTranslation()
+  const navigate = useNavigate();
+  const [user, setUser]= useState({})
+
+  useEffect(() => {
+    fetchOneUser(overview.userId).then(data => setUser(data))
+  }, [])
     
   return (
-    <Card className="p-3 m-2" >
-          <Card.Header style={{fontSize: 20, cursor: "pointer" }} onClick={() => navigate("/overveiw/" + overview.id)}>{overview.text}</Card.Header>
-          <Card.Body className='d-flex justify-content-around'>
-          <div className='d-flex align-items-center' style={{cursor: "pointer" }} onClick={() => navigate('/user/' + overview.userId)}> 
-            Оценка user {overview.rating}
-            <Image src={star} />
-          </div>
-          <div className='d-flex align-items-center'> 
-          {overview.averageRating? ('Средняя оценка обзора ' + overview.averageRating) : 'Оцени обзорпервым '}
-          <Image src={star} />
-          </div>
-        </Card.Body>
-        <Card.Text >
-          <div>
-            {overview.img.map(img => 
-                <Image style={{ width: '25%', margin: 15}} key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
-            )}
-          </div>
-          <div className='m-4'>
-            {overview.text}
-          </div>
-          <div className='d-flex justify-content-end'>
-            {new Date(Date.parse(overview.createdAt)).toLocaleString()}
-          </div>
-        </Card.Text>
+    <Card>
+      <Card.Header style={{fontSize: 20, cursor: "pointer"}} onClick={() => navigate("/overveiw/" + overview.id)}>{overview.name}</Card.Header>
+          <Card.Body>
+            <Row>
+              <Col sm={7}>
+                <Carousel variant="dark" interval={null}>
+              {overview.img.map(img => 
+              <Carousel.Item>
+                <img className="d-block w-100 m-auto"  key={img.id} src={process.env.REACT_APP_API_URL + img.name}/>
+              </Carousel.Item>)}
+            </Carousel>
+              </Col>
+              <Col>
+                <h2 style={{cursor: "pointer"}} onClick={() => navigate('/user/' + overview.userId)}>{t('Author')}: {user.name} </h2>
+                <div className='d-flex flex-nowrap my-3'> 
+                  <h3 style={{alignSelf:'center', margin:0}}> {t(`Author's rating`)} {overview.rating} </h3>
+                  <img src={star} style={{width:40, margin:6}}/>
+                </div>
+                <div className='d-flex flex-nowrap align-items-center mb-4'> 
+                   {overview.averageRating? (<h3 style={{alignSelf:'center', margin:0}}> {t('Average rating')}  {overview.averageRating}</h3> ): (<h3> {t('Rate first')} </h3>)}
+                  <img src={star} style={{width:40, margin:6}}/>
+                </div>
+                <div>
+                  <h5> {t('Published')}: {new Date(Date.parse(overview.createdAt)).toLocaleString()}</h5>
+                </div>
+              </Col>
+            </Row>
+          </Card.Body>
     </Card>
   )
 }

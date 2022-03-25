@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next'
 import { useContext, useEffect } from "react";
 import {
   Navbar,
@@ -9,13 +10,23 @@ import {
   Button,
   Form,
   FormControl,
+  ButtonGroup,
   Card,
-  Image
+  Image,
+  ToggleButton,
+  ToggleButtonGroup,
+  InputGroup
 } from "react-bootstrap";
 import { Context } from "..";
 
 
 const NavBar = observer(() => {
+  const { t, i18n } = useTranslation()
+
+  const changeLanguageHandler = (lang) =>
+     {
+       i18n.changeLanguage(lang)
+     }
 
   const navigate = useNavigate()
   
@@ -30,33 +41,42 @@ const NavBar = observer(() => {
   const userName = localStorage.getItem('name')
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar className="mb-3" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="/">iRecommend</Navbar.Brand>
-        <Nav className="w-100 d-flex justify-content-around">
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="light">Search</Button>
-          </Form>
-          {userName? 
-          <>
-          <Button variant="light" onClick={() => navigate('/create-overview')}> Добавить отзыв </Button>
-          <Button variant="light" onClick={() => logOut()}> Выйти </Button> 
-          <Button variant="light" 
-          onClick={()=> {
-            if(localStorage.getItem('role')=== 'ADMIN'){
-              navigate('/user/ADMIN')
-            } else navigate('/user/' + localStorage.getItem('id'))}
-          }>{userName}</Button>
-          </>
-        :
-          <Button variant="light" href="/login"> Войти </Button>
-        }
+          <Nav className="w-100 d-flex justify-content-between">
+            <Form className="d-flex ">
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="light">{t('Search')}</Button>
+            </Form>
+            {userName? 
+              <>
+                <Button variant="light" onClick={() => navigate('/create-overview')}>{t('Add review') } </Button>
+                <Form className="d-flex flex-nowrap">
+                   <Form.Label style={{color:'white', marginRight:8}}>En</Form.Label>
+                  <Form.Check type="switch" onChange={e => changeLanguageHandler(e.target.checked ? 'ru' : 'en')}/>
+                  <Form.Label style={{color:'white'}}>Ru</Form.Label>
+                </Form>
+               
+                <ButtonGroup>
+                  <Button variant="light" 
+                    onClick={()=> {
+                      if(localStorage.getItem('role')=== 'ADMIN'){
+                        navigate('/user/ADMIN')
+                      } else navigate('/user/' + localStorage.getItem('id'))}
+                    }> {userName}
+                  </Button>
+                  <Button variant="danger" onClick={() => logOut()}> {t('Go out') } </Button> 
+                </ButtonGroup>
+              </>
+            :
+              <Button variant="light" href="/login">{t('Enter') }</Button>
+            }
         </Nav>
       </Container>
     </Navbar>

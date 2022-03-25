@@ -5,7 +5,7 @@ import OverviewTop from '../components/OverviewTop'
 import OverviewLast from '../components/OverviewLast'
 import { fetchOverviews, fetchTypes } from '../http/oveviewAPI'
 import { Context } from '..'
-import {Container} from 'react-bootstrap'
+import {Container, Tab, Tabs} from 'react-bootstrap'
 
 const MainPage = observer(() => {
   const {overview} = useContext(Context)
@@ -24,8 +24,14 @@ const MainPage = observer(() => {
   return (
     <Container>
       <TypeBar/>
-      <OverviewTop/>
-      <OverviewLast/>
+      <Tabs defaultActiveKey='top' variant="pills" style={{fontSize: 20}}>
+        <Tab eventKey='top' title='Топовые обзоры' >
+          <OverviewTop/>
+        </Tab>
+        <Tab eventKey='last' title='Последние обзоры'>
+          <OverviewLast/>
+        </Tab>
+      </Tabs>
     </Container>
   )
 })

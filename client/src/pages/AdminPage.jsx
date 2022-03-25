@@ -2,10 +2,13 @@ import React, {useState, useEffect } from 'react'
 import { login} from "../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next'
 import {fetchUsers} from '../http/userAPI'
 import { Card, Container, Button} from 'react-bootstrap'
 
 const AdminPage = observer(() => {
+  const { t } = useTranslation()
+
     const [users, setUsers]= useState({})
     const navigate = useNavigate()
     useEffect(() => {
@@ -24,16 +27,16 @@ const AdminPage = observer(() => {
         <Card>
             <Card.Header>
                 <h1>
-                  admin  
+                {t('Admin')}  
                 </h1>
             </Card.Header>
             {users.length ? (users.map( i => 
                 <Card.Body key={i.id} >
                    <Button variant="dark" className ='d-flex align-items-center' onClick={ () => clickLogin(i.email, i.password)}>
-                        Войти как  {i.name}  
+                   {t('Login as')}  {i.name}  
                     </Button>
                 </Card.Body>)
-            ) : (<Card.Body> никого нет </Card.Body>)}
+            ) : (<Card.Body> {t('There is not anyone')}</Card.Body>)}
             {}
         </Card>
      </Container>

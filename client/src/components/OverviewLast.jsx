@@ -13,12 +13,11 @@ const OverviewLast = observer(() => {
     }
 
   return (
-    <Container>
-        <h1>Последние обзоры</h1>
+    <div className='mt-4'>
         {newOverviews.sort((a, b) => a.createdAt < b.createdAt ? 1 : -1).map(i => 
         <OverviewItem key={i.id} overview={i}/>
       )}
-    </Container>
+    </div>
   )
 })
 

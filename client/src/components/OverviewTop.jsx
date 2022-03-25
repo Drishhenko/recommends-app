@@ -22,12 +22,11 @@ const OverviewTop = observer(() => {
   }
   
   return (
-    <Container>
-      <h1>Топовые обзоры</h1>
+    <div className='mt-4'>
       {newOverviews.sort((a, b) => a.averageRating < b.averageRating ? 1 : -1).map(i => 
         <OverviewItem key={i.id} overview={i}/>
       )}
-    </Container>
+    </div>
   );
 });
 

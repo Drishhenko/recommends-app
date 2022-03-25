@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import {Card, Container, Form, FormControl, Button, Image} from "react-bootstrap";
 import { useLocation, useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next'
 import vk from "../imgs/icon-vk.svg";
 import facebook from "../imgs/icon-facebook.svg";
 import { login, registration } from "../http/userAPI";
@@ -10,6 +11,7 @@ import { useContext } from "react";
 import { Context } from "..";
 
 const AuthPage = observer(() => {
+  const { t } = useTranslation()
   const {user} = useContext(Context)
   const location = useLocation();
   const navigate = useNavigate()
@@ -41,7 +43,7 @@ const AuthPage = observer(() => {
     >
       <Card className="w-50 h-50 p-5 d-flex justify-content-between">
         <Form>
-          <h4>Войти используя E-mail и пароль</h4>
+          <h4>{t('Login using E-mail and password')}</h4>
           
           {isLogin ? (
             <></>
@@ -69,16 +71,16 @@ const AuthPage = observer(() => {
           <Form.Group className="d-flex justify-content-around mt-3">
             {isLogin ? (
               <>
-                <Button variant="dark" onClick={clickAuth}>Войти</Button>
+                <Button variant="dark" onClick={clickAuth}>{t('Login')}</Button>
                 <Button variant="light" href="/registration">                  
-                  Регистрация
+                {t('Registration')}
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="dark" onClick={clickAuth}>Регистрация</Button>
+                <Button variant="dark" onClick={clickAuth}>{t('Registration')}</Button>
                 <Button variant="light" href="/login">
-                  Войти
+                {t('Login')}
                 </Button>
               </>
             )}
@@ -86,7 +88,7 @@ const AuthPage = observer(() => {
         </Form>
 
         <Form className="d-flex align-items-center mt-4">
-          <h4>Войти через социальную сеть</h4>
+          <h4>{t('Login via social network')}</h4>
           <Image style={{ width: 50 }} src={vk} />
           <Image style={{ width: 50 }} src={facebook} />
         </Form>
