@@ -1,9 +1,8 @@
-import './App.css'
 import {BrowserRouter} from 'react-router-dom'
 import AppRouter from './components/AppRouter';
 import NavBar from './components/NavBar';
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 
 i18n
   .use(initReactI18next) 
@@ -37,12 +36,7 @@ i18n
           "Login using E-mail and password":"Login using E-mail and password",
           "Registration":"Registration",
           "Login via social network":"Login via social network",
-          "Comments":"Comments",
-          "":"",
-          "":"",
-          "":"",
-          "":"",
-
+          "Comments":"Comments"
         }
       },
       ru: {
@@ -73,10 +67,7 @@ i18n
           "Login using E-mail and password":"Войти используя E-mail и пароль",
           "Registration":"Регистрация",
           "Login via social network":"Войти через социальную сеть",
-          "Comments":"Комментарии",
-          "":"",
-          "":"",
-          "":"",
+          "Comments":"Комментарии"
         }
       }
     },

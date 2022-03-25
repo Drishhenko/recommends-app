@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
 import OverviewItem from "./OverviewItem";
-import { Container} from "react-bootstrap";
 
 const OverviewLast = observer(() => {
     const { overview } = useContext(Context);

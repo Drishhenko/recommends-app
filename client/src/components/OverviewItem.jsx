@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next'
 import {fetchOneUser} from '../http/userAPI'
-import {Card, Image, Carousel, CarouselItem, Row, Col } from "react-bootstrap";
 import star from "../imgs/star.svg";
+import {Card, Carousel, Row, Col } from "react-bootstrap";
 
 const OverviewItem = ({overview}) => {
   const { t } = useTranslation()

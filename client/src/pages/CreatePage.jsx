@@ -1,13 +1,12 @@
-import React from "react";
-import { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect} from "react";
 import {useNavigate} from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 import { useTranslation } from 'react-i18next'
 import { Context } from "..";
-import TypeBar from "../components/TypeBar";
-import { Button, Container, Form } from "react-bootstrap";
-import { observer } from "mobx-react-lite";
 import { createOverview, fetchTypes} from "../http/oveviewAPI";
+import TypeBar from "../components/TypeBar";
 import star from "../imgs/star.svg";
+import { Button, Container, Form } from "react-bootstrap";
 
 const CreateOverview = observer(() => {
   const { t } = useTranslation()
@@ -22,10 +21,6 @@ const CreateOverview = observer(() => {
   useEffect(() => {
     fetchTypes().then(data => overview.setTypes(data))
   }, [])
-
-  // const handleTypeBarClick = (id) => {
-  //   setTypeId(id)
-  // }
 
   const selectFiles = e => {
     setFiles( e.target.files)

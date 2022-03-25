@@ -1,8 +1,6 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import UserStore from './store/UserStore';
 import OverviewStore from './store/OverviewStore';
 
@@ -17,4 +15,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals();

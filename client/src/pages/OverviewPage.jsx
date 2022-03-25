@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {observer} from 'mobx-react-lite'
-import { Card, Container, Image, Form, Button, Carousel, InputGroup, Row, Col, CardGroup } from 'react-bootstrap'
 import { useParams, useNavigate} from 'react-router-dom'
+import {observer} from 'mobx-react-lite'
 import { useTranslation } from 'react-i18next'
-import { fetchOneOverview } from '../http/oveviewAPI'
+import { createRate, fetchOneOverview, createComment } from '../http/oveviewAPI'
 import {fetchOneUser} from '../http/userAPI'
 import star from "../imgs/star.svg";
-import { createRate, } from '../http/oveviewAPI'
-import { createComment } from '../http/oveviewAPI'
+import { Card, Container, Image, Form, Button, Carousel, InputGroup, Row, Col, CardGroup } from 'react-bootstrap'
 
 const OverviewPage = observer(() => {
 const { t } = useTranslation()

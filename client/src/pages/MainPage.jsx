@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import {observer} from "mobx-react-lite";
+import { Context } from '..'
+import { fetchOverviews, fetchTypes } from '../http/oveviewAPI'
 import TypeBar from '../components/TypeBar'
 import OverviewTop from '../components/OverviewTop'
 import OverviewLast from '../components/OverviewLast'
-import { fetchOverviews, fetchTypes } from '../http/oveviewAPI'
-import { Context } from '..'
 import {Container, Tab, Tabs} from 'react-bootstrap'
 
 const MainPage = observer(() => {

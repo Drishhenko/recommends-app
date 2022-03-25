@@ -1,14 +1,12 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
-import {Card, Container, Form, FormControl, Button, Image} from "react-bootstrap";
+import React, { useState, useContext }from "react";
 import { useLocation, useNavigate} from "react-router-dom";
+import { observer } from "mobx-react-lite";
 import { useTranslation } from 'react-i18next'
+import { Context } from "..";
+import { login, registration } from "../http/userAPI";
 import vk from "../imgs/icon-vk.svg";
 import facebook from "../imgs/icon-facebook.svg";
-import { login, registration } from "../http/userAPI";
-import { useState } from "react";
-import { useContext } from "react";
-import { Context } from "..";
+import {Card, Container, Form, FormControl, Button, Image} from "react-bootstrap";
 
 const AuthPage = observer(() => {
   const { t } = useTranslation()

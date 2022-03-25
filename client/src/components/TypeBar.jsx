@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { observer } from "mobx-react-lite";
 import { useTranslation } from 'react-i18next'
 import { Context } from "../index";
