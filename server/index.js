@@ -3,6 +3,7 @@ const express = require('express')
 const fileupload = require('express-fileupload')
 const path = require('path')
 const sequelize = require('./db')
+const models = require('./models')
 const cors = require('cors')
 const router = require('./routes/index')
 
@@ -14,12 +15,6 @@ app.use(express.json())
 app.use(express.static(path.resolve(__dirname, 'static')))
 app.use(fileupload({}))
 app.use('/api', router)
-
-app.use(express.static(path.join(__dirname, "/client/build")));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
 
 
 const start = async () => {
