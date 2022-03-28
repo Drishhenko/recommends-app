@@ -47,15 +47,14 @@ const NavBar = observer(() => {
               />
               <Button variant="light">{t('Search')}</Button>
             </Form>
+            <Form className="d-flex flex-nowrap align-items-center">
+                   <Form.Label style={{color:'white', marginRight:8, marginBottom:0}}>En</Form.Label>
+                  <Form.Check type="switch" onChange={e => changeLanguageHandler(e.target.checked ? 'ru' : 'en')}/>
+                  <Form.Label style={{color:'white', marginBottom:0}}>Ru</Form.Label>
+                </Form>
             {userName? 
               <>
-                <Button variant="light" onClick={() => navigate('/create-overview')}>{t('Add review') } </Button>
-                <Form className="d-flex flex-nowrap">
-                   <Form.Label style={{color:'white', marginRight:8}}>En</Form.Label>
-                  <Form.Check type="switch" onChange={e => changeLanguageHandler(e.target.checked ? 'ru' : 'en')}/>
-                  <Form.Label style={{color:'white'}}>Ru</Form.Label>
-                </Form>
-               
+                <Button variant="light" onClick={() => navigate('/create-overview')}>{t('Add review') } </Button>            
                 <ButtonGroup>
                   <Button variant="light" 
                     onClick={()=> {
@@ -68,7 +67,7 @@ const NavBar = observer(() => {
                 </ButtonGroup>
               </>
             :
-              <Button variant="light" href="/login">{t('Enter') }</Button>
+              <Button variant="light" href="/login">{t('Login') }</Button>
             }
         </Nav>
       </Container>

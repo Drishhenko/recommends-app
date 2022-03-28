@@ -7,7 +7,6 @@ export const createOverview = async (overview) => {
 
 export const fetchOverviews = async (typeId, userId, page, limit=20) => {
     const {data} = await $host.get('api/overview', {params: {typeId, userId, page, limit}})
-    
     return data
 }
 

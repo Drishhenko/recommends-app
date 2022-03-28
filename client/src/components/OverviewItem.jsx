@@ -15,11 +15,11 @@ const OverviewItem = ({overview}) => {
   }, [])
     
   return (
-    <Card>
+    <Card className='mb-3'>
       <Card.Header style={{fontSize: 20, cursor: "pointer"}} onClick={() => navigate("/overveiw/" + overview.id)}>{overview.name}</Card.Header>
           <Card.Body>
             <Row>
-              <Col sm={7}>
+              <Col sm={5}>
                 <Carousel variant="dark" interval={null}>
               {overview.img.map(img => 
               <Carousel.Item>

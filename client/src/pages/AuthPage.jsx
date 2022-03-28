@@ -39,7 +39,7 @@ const AuthPage = observer(() => {
       className="d-flex justify-content-center align-items-center"
       style={{ height: window.innerHeight - 54 }}
     >
-      <Card className="w-50 h-50 p-5 d-flex justify-content-between">
+      <Card className="w-50 h-50 p-4 d-flex justify-content-between">
         <Form>
           <h4>{t('Login using E-mail and password')}</h4>
           
